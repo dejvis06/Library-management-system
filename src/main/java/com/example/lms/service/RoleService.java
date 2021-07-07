@@ -2,13 +2,10 @@ package com.example.lms.service;
 
 import java.util.NoSuchElementException;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.lms.entity.Role;
-import com.example.lms.entity.User;
 import com.example.lms.repository.RoleRepository;
 
 @Service

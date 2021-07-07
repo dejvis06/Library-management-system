@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.example.lms.entity.User;
 import com.example.lms.service.BookService;
 import com.example.lms.service.RoleService;
 import com.example.lms.service.UserService;

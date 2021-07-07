@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.lms.entity.Book;
-import com.example.lms.entity.User;
 import com.example.lms.service.BookService;
 import com.example.lms.util.HttpResponse;
 
@@ -28,7 +27,6 @@ public class BookController {
 
 		book = bookService.save(book);
 		return createHttpResponse(book, OK);
-
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/find")

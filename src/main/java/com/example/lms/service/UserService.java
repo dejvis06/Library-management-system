@@ -22,6 +22,8 @@ import com.example.lms.util.UserCustody;
 @Service
 public class UserService implements UserDetailsService {
 
+	private static final String USERNAME_NOT_FOUND = "Username not found!";
+
 	@Autowired
 	private UserRepository userRepository;
 
@@ -54,8 +56,10 @@ public class UserService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
 		User user = userRepository.findByUsername(username);
-		user.setAuthorities(getAuthorities(user.getRoles()));
+		if (user == null)
+			throw new UsernameNotFoundException(USERNAME_NOT_FOUND);
 
+		user.setAuthorities(getAuthorities(user.getRoles()));
 		return new UserCustody(user);
 	}
 

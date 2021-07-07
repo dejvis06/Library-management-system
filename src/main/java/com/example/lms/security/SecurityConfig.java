@@ -29,8 +29,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.headers().frameOptions().disable().and().csrf().disable().cors().and().authorizeRequests()
-				.antMatchers("/user/find").access("hasAuthority('book:read')").antMatchers(PUBLIC_URLS).permitAll()
-				.anyRequest().authenticated().and()
+				.antMatchers("/user/find").access("hasAuthority('user:read')").antMatchers("/user/save")
+				.access("hasAuthority('user:update')").antMatchers("/user/delete").access("hasAuthority('user:delete')")
+				.antMatchers(PUBLIC_URLS).permitAll().anyRequest().authenticated().and()
 				.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 

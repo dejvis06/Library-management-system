@@ -33,7 +33,7 @@ public class User {
 
 	private boolean isActive;
 
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToMany(cascade = { CascadeType.MERGE })
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user"), inverseJoinColumns = @JoinColumn(name = "role"))
 	private List<Role> roles;
 

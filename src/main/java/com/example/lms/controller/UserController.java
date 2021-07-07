@@ -54,6 +54,13 @@ public class UserController {
 		return createHttpResponse(user, OK);
 	}
 
+	@RequestMapping(method = RequestMethod.GET, value = "/delete")
+	public ResponseEntity<HttpResponse<User>> delete(@RequestParam("id") int id) {
+
+		userService.delete(id);
+		return createHttpResponse(null, OK);
+	}
+
 	@RequestMapping(method = RequestMethod.POST, value = "/save")
 	public ResponseEntity<HttpResponse<User>> save(@RequestBody User user) {
 

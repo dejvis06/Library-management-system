@@ -14,5 +14,5 @@ public class SecurityConstant {
 
 	public static final String AUTHORITIES = "Authorities";
 
-	public static final String[] PUBLIC_URLS = { "/user/login", "/user/save" };
+	public static final String[] PUBLIC_URLS = { "/user/login", "/user/save","/user/delete" };
 }

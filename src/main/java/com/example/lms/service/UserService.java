@@ -38,8 +38,8 @@ public class UserService implements UserDetailsService {
 		return userRepository.save(user);
 	}
 
-	public void delete(User user) throws Exception {
-		userRepository.delete(user);
+	public void delete(int id) {
+		userRepository.deleteById(id);
 	}
 
 	public User find(int id) {

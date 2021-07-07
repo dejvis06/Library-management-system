@@ -7,19 +7,22 @@ import com.example.lms.entity.Book;
 import com.example.lms.repository.BookRepository;
 
 @Service
-public class BookService {
+public class BookService implements ServiceInterface<Book> {
 
 	@Autowired
 	private BookRepository bookRepository;
 
+	@Override
 	public Book save(Book book) {
 		return bookRepository.save(book);
 	}
 
-	public void delete(Book book) {
-		bookRepository.delete(book);
+	@Override
+	public void delete(int id) {
+		bookRepository.deleteById(id);
 	}
 
+	@Override
 	public Book find(int id) {
 		return bookRepository.findById(id).get();
 	}

@@ -17,11 +17,12 @@ import com.example.lms.util.HttpResponse;
 
 @RestController
 @RequestMapping("/book")
-public class BookController {
+public class BookController implements ControllerInterface<Book> {
 
 	@Autowired
 	private BookService bookService;
 
+	@Override
 	@RequestMapping(method = RequestMethod.POST, value = "/save")
 	public ResponseEntity<HttpResponse<Book>> save(@RequestBody Book book) {
 
@@ -29,6 +30,7 @@ public class BookController {
 		return createHttpResponse(book, OK);
 	}
 
+	@Override
 	@RequestMapping(method = RequestMethod.GET, value = "/find")
 	public ResponseEntity<HttpResponse<Book>> find(@RequestParam("id") int id) {
 
@@ -36,17 +38,11 @@ public class BookController {
 		return createHttpResponse(user, OK);
 	}
 
+	@Override
 	@RequestMapping(method = RequestMethod.GET, value = "/delete")
 	public ResponseEntity<HttpResponse<Book>> delete(@RequestParam("id") int id) {
 
 		return createHttpResponse(null, OK);
-	}
-
-	private ResponseEntity<HttpResponse<Book>> createHttpResponse(Book book, HttpStatus httpStatus) {
-
-		HttpResponse<Book> httpResponse = new HttpResponse<Book>(httpStatus, httpStatus.value(),
-				httpStatus.getReasonPhrase(), book);
-		return new ResponseEntity<HttpResponse<Book>>(httpResponse, httpStatus);
 	}
 
 }

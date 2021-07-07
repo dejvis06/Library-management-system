@@ -23,7 +23,7 @@ import com.example.lms.util.UserCustody;
 
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController implements ControllerInterface<User> {
 
 	@Autowired
 	private UserService userService;
@@ -47,6 +47,7 @@ public class UserController {
 				header, HttpStatus.OK);
 	}
 
+	@Override
 	@RequestMapping(method = RequestMethod.GET, value = "/find")
 	public ResponseEntity<HttpResponse<User>> find(@RequestParam("id") int id) {
 
@@ -54,6 +55,7 @@ public class UserController {
 		return createHttpResponse(user, OK);
 	}
 
+	@Override
 	@RequestMapping(method = RequestMethod.GET, value = "/delete")
 	public ResponseEntity<HttpResponse<User>> delete(@RequestParam("id") int id) {
 
@@ -61,18 +63,12 @@ public class UserController {
 		return createHttpResponse(null, OK);
 	}
 
+	@Override
 	@RequestMapping(method = RequestMethod.POST, value = "/save")
 	public ResponseEntity<HttpResponse<User>> save(@RequestBody User user) {
 
 		user = userService.save(user);
 		return createHttpResponse(user, OK);
-	}
-
-	private ResponseEntity<HttpResponse<User>> createHttpResponse(User user, HttpStatus httpStatus) {
-
-		HttpResponse<User> httpResponse = new HttpResponse<User>(httpStatus, httpStatus.value(),
-				httpStatus.getReasonPhrase(), user);
-		return new ResponseEntity<HttpResponse<User>>(httpResponse, httpStatus);
 	}
 
 	private HttpHeaders getHeaderWithJwt(UserCustody userCustody) {

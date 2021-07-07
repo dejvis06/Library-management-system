@@ -1,13 +1,12 @@
 package com.example.lms.controller;
 
-import static org.springframework.http.HttpStatus.FORBIDDEN;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.*;
 
 import java.util.NoSuchElementException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -23,13 +22,13 @@ public class CustomExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<HttpResponse> general(Exception ex) {
 
-		switch (ex.getClass().getPackageName()) {
+		return createHttpResponse(INTERNAL_SERVER_ERROR, ex.getMessage());
+	}
 
-		case AUTHENTICATION_PACKAGE:
-			return createHttpResponse(FORBIDDEN, ex.getMessage());
-		default:
-			return createHttpResponse(INTERNAL_SERVER_ERROR, ex.getMessage());
-		}
+	@ExceptionHandler(AuthenticationException.class)
+	public ResponseEntity<HttpResponse> noSuchElement(AuthenticationException ex) {
+
+		return createHttpResponse(UNAUTHORIZED, ex.getMessage());
 	}
 
 	@ExceptionHandler(NoSuchElementException.class)

@@ -23,7 +23,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private UserService userDetailsService;
 
 	@Autowired
-	private JwtAuthorizationFilter jwtAuthorizationFilter;
+	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
+	@Autowired
+	private JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -33,8 +36,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.access("hasAuthority('user:update')").antMatchers("/user/delete").access("hasAuthority('user:delete')")
 				.antMatchers("/book/save").access("hasAuthority('book:create')").antMatchers("/book/find")
 				.access("hasAuthority('book:read')").antMatchers("/book/delete").access("hasAuthority('book:delete')")
-				.antMatchers(PUBLIC_URLS).permitAll().anyRequest().authenticated().and()
-				.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
+				.antMatchers(PUBLIC_URLS).permitAll().anyRequest().authenticated().and().exceptionHandling()
+				.accessDeniedHandler(jwtAccessDeniedHandler).and()
+				.addFilterBefore(jwtAuthenticationEntryPoint, UsernamePasswordAuthenticationFilter.class);
 	}
 
 	@Bean

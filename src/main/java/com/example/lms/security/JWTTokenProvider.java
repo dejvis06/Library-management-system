@@ -60,13 +60,7 @@ public class JWTTokenProvider {
 
 	private String[] getClaimsFromUser(UserCustody userCustody) {
 
-		List<String> authorities = new ArrayList<>();
-
-		for (GrantedAuthority grantedAuthority : userCustody.getAuthorities()) {
-			authorities.add(grantedAuthority.getAuthority());
-		}
-
-		return StringUtils.toStringArray(authorities);
+		return userCustody.getUser().getAuthorities();
 	}
 
 	public List<GrantedAuthority> getAuthorities(String token) {

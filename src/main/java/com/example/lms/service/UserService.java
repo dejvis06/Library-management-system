@@ -17,7 +17,7 @@ import com.example.lms.repository.UserRepository;
 import com.example.lms.util.UserCustody;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService implements UserDetailsService, ServiceInterface<User> {
 
 	private static final String USERNAME_NOT_FOUND = "Username not found!";
 
@@ -27,6 +27,7 @@ public class UserService implements UserDetailsService {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+	@Override
 	public User save(User user) {
 
 		if (user.getId() == 0) {
@@ -37,10 +38,12 @@ public class UserService implements UserDetailsService {
 		return userRepository.save(user);
 	}
 
+	@Override
 	public void delete(int id) {
 		userRepository.deleteById(id);
 	}
 
+	@Override
 	public User find(int id) {
 
 		User user = userRepository.findById(id).get();

@@ -19,7 +19,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.example.lms.util.SecurityConstant;
 
 @Component
-public class JwtAuthorizationFilter extends OncePerRequestFilter {
+public class JwtAuthenticationEntryPoint extends OncePerRequestFilter {
 
 	@Autowired
 	private JWTTokenProvider jwtTokenProvider;

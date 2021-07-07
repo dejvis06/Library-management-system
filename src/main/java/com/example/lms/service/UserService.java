@@ -28,7 +28,7 @@ public class UserService implements UserDetailsService {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	public User save(User user) throws Exception {
+	public User save(User user) {
 
 		user.setPassword(encodePassword(user.getPassword()));
 		user.setActive(true);
@@ -42,7 +42,7 @@ public class UserService implements UserDetailsService {
 		userRepository.delete(user);
 	}
 
-	public User find(int id) throws Exception {
+	public User find(int id) {
 
 		User user = userRepository.findById(id).get();
 		user.setAuthorities(getAuthorities(user.getRoles()));

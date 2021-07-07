@@ -48,14 +48,14 @@ public class UserController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/find")
-	public ResponseEntity<HttpResponse<User>> find(@RequestParam("id") int id) throws Exception {
+	public ResponseEntity<HttpResponse<User>> find(@RequestParam("id") int id) {
 
 		User user = userService.find(id);
 		return createHttpResponse(user, OK);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/save")
-	public ResponseEntity<HttpResponse<User>> save(@RequestBody User user) throws Exception {
+	public ResponseEntity<HttpResponse<User>> save(@RequestBody User user) {
 
 		user = userService.save(user);
 		return createHttpResponse(user, OK);

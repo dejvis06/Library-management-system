@@ -17,12 +17,10 @@ public class RoleService {
 	@Autowired
 	private RoleRepository roleRepository;
 
-	@Transactional
 	public Role save(Role role) throws Exception {
 		return roleRepository.save(role);
 	}
 
-	@Transactional
 	public void delete(Role role) throws Exception {
 		roleRepository.delete(role);
 	}

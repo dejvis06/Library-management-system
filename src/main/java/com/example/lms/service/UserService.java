@@ -32,10 +32,10 @@ public class UserService implements UserDetailsService {
 
 	public User save(User user) {
 
-		user.setPassword(encodePassword(user.getPassword()));
-		user.setActive(true);
-		// user.setRoles(Arrays.asList(new
-		// Role(com.example.lms.util.Role.ROLE_USER.name())));
+		if (user.getId() == 0) {
+			user.setPassword(encodePassword(user.getPassword()));
+			user.setActive(false);
+		}
 
 		return userRepository.save(user);
 	}

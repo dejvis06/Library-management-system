@@ -31,6 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.headers().frameOptions().disable().and().csrf().disable().cors().and().authorizeRequests()
 				.antMatchers("/user/find").access("hasAuthority('user:read')").antMatchers("/user/save")
 				.access("hasAuthority('user:update')").antMatchers("/user/delete").access("hasAuthority('user:delete')")
+				.antMatchers("/book/save").access("hasAuthority('book:create')").antMatchers("/book/find")
+				.access("hasAuthority('book:read')").antMatchers("/book/delete").access("hasAuthority('book:delete')")
 				.antMatchers(PUBLIC_URLS).permitAll().anyRequest().authenticated().and()
 				.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
 	}

@@ -1,8 +1,9 @@
 package com.example.lms.security;
 
-import static com.example.lms.util.SecurityConstant.*;
+import static com.example.lms.util.SecurityConstant.AUTHORITIES;
+import static com.example.lms.util.SecurityConstant.EXPIRATION_TIME;
+import static com.example.lms.util.SecurityConstant.ISSUER;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +11,6 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.util.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

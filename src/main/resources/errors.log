@@ -1,0 +1,5 @@
+2021-07-08 14:15:17 ERROR {"httpStatus":"NOT_FOUND","httpStatusCode":404,"reason":"NO VALUE PRESENT","message":null,"object":null}
+2021-07-08 14:16:01 ERROR {"httpStatus":"NOT_FOUND","httpStatusCode":404,"reason":"NO VALUE PRESENT","message":null,"object":null}
+2021-07-08 14:16:29 ERROR {"httpStatus":"INTERNAL_SERVER_ERROR","httpStatusCode":500,"reason":"CANNOT INVOKE \"ORG.APACHE.LOGGING.LOG4J.LOGGER.INFO(STRING)\" BECAUSE \"THIS.LOGGER\" IS NULL","message":null,"object":null}
+2021-07-08 14:17:06 ERROR {"httpStatus":"INTERNAL_SERVER_ERROR","httpStatusCode":500,"reason":"CANNOT INVOKE \"ORG.APACHE.LOGGING.LOG4J.LOGGER.INFO(STRING)\" BECAUSE \"THIS.LOGGER\" IS NULL","message":null,"object":null}
+2021-07-08 14:23:20 ERROR {"httpStatus":"INTERNAL_SERVER_ERROR","httpStatusCode":500,"reason":"CANNOT INVOKE \"JAVA.LANG.CLASS.GETSIMPLENAME()\" BECAUSE \"THIS.CLAZZ\" IS NULL","message":null,"object":null}

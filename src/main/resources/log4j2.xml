@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+		<File name="user-info"
+			fileName="C:\\Users\\dbeqiraj\\git\\lms\\src\\main\\resources\\user_info.log"
+			filePattern="C:\\Users\\dbeqiraj\\git\\lms\\src\\main\\resources\\user_info.%d{dd-MM-yyyy}.log.gz">
+			<PatternLayout>
+				<Pattern>%d{yyyy-MM-dd HH:mm:ss} %p %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<DefaultRolloverStrategy />
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+		</File>
+		<File name="book-info"
+			fileName="C:\\Users\\dbeqiraj\\git\\lms\\src\\main\\resources\\book_info.log"
+			filePattern="C:\\Users\\dbeqiraj\\git\\lms\\src\\main\\resources\\book_info.%d{dd-MM-yyyy}.log.gz">
+			<PatternLayout>
+				<Pattern>%d{yyyy-MM-dd HH:mm:ss} %p %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<DefaultRolloverStrategy />
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+		</File>
+		<File name="errors"
+			fileName="C:\\Users\\dbeqiraj\\git\\lms\\src\\main\\resources\\errors.log"
+			filePattern="C:\\Users\\dbeqiraj\\git\\lms\\src\\main\\resources\\errors.%d{dd-MM-yyyy}.log.gz">
+			<PatternLayout>
+				<Pattern>%d{yyyy-MM-dd HH:mm:ss} %p %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<DefaultRolloverStrategy />
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+		</File>
+	</Appenders>
+
+	<Loggers>
+		<Logger name="UserService" level="info" additivity="false">
+			<AppenderRef ref="user-info" />
+		</Logger>
+		<Logger name="BookService" level="info" additivity="false">
+			<AppenderRef ref="book-info" />
+		</Logger>
+		<Logger name="CustomExceptionHandler" level="error"
+			additivity="false">
+			<AppenderRef ref="errors" />
+		</Logger>
+		<Logger name="JwtAccessDeniedHandler" level="error"
+			additivity="false">
+			<AppenderRef ref="errors" />
+		</Logger>
+		<Root level="info">
+			<AppenderRef ref="Console" level="info" />
+		</Root>
+	</Loggers>
+</Configuration>

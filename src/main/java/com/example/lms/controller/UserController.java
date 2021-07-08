@@ -20,10 +20,23 @@ import com.example.lms.service.UserService;
 import com.example.lms.util.HttpResponse;
 import com.example.lms.util.SecurityConstant;
 import com.example.lms.util.UserCustody;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 @RestController
 @RequestMapping("/user")
 public class UserController implements ControllerInterface<User> {
+
+	private static final String FIND = "FIND";
+
+	private static final String DELETE = "DELETE";
+
+	private static final String SAVE = "SAVE";
+
+	private static final String REQUEST = "REQUEST";
+
+	private static final String RESPONSE = "RESPONSE";
+
+	private static final String LOGIN = "LOGIN";
 
 	@Autowired
 	private UserService userService;
@@ -35,7 +48,9 @@ public class UserController implements ControllerInterface<User> {
 	private AuthenticationManager authenticationManager;
 
 	@RequestMapping(method = RequestMethod.POST, value = "/login")
-	public ResponseEntity<HttpResponse<User>> login(@RequestBody User user) {
+	public ResponseEntity<HttpResponse<User>> login(@RequestBody User user) throws JsonProcessingException {
+
+		userService.log(LOGIN, REQUEST, user);
 
 		authenticate(user.getUsername(), user.getPassword());
 
@@ -43,32 +58,54 @@ public class UserController implements ControllerInterface<User> {
 
 		HttpHeaders header = getHeaderWithJwt(userCustody);
 
+		HttpResponse<User> response = new HttpResponse<User>(OK, OK.value(), OK.getReasonPhrase(),
+				userCustody.getUser());
+		userService.log(LOGIN, RESPONSE, response);
+
 		return new ResponseEntity<>(new HttpResponse<User>(OK, OK.value(), OK.getReasonPhrase(), userCustody.getUser()),
 				header, HttpStatus.OK);
 	}
 
 	@Override
 	@RequestMapping(method = RequestMethod.GET, value = "/find")
-	public ResponseEntity<HttpResponse<User>> find(@RequestParam("id") int id) {
+	public ResponseEntity<HttpResponse<User>> find(@RequestParam("id") int id) throws JsonProcessingException {
+
+		userService.log(FIND, REQUEST, "id: " + id);
 
 		User user = userService.find(id);
-		return createHttpResponse(user, OK);
+
+		HttpResponse<User> httpResponse = userService.createHttpResponse(user, OK);
+		userService.log(FIND, RESPONSE, httpResponse);
+
+		return new ResponseEntity<HttpResponse<User>>(httpResponse, OK);
 	}
 
 	@Override
 	@RequestMapping(method = RequestMethod.GET, value = "/delete")
-	public ResponseEntity<HttpResponse<User>> delete(@RequestParam("id") int id) {
+	public ResponseEntity<HttpResponse<User>> delete(@RequestParam("id") int id) throws JsonProcessingException {
+
+		userService.log(DELETE, REQUEST, "id: " + id);
 
 		userService.delete(id);
-		return createHttpResponse(null, OK);
+
+		HttpResponse<User> httpResponse = userService.createHttpResponse(null, OK);
+		userService.log(DELETE, RESPONSE, httpResponse);
+
+		return new ResponseEntity<HttpResponse<User>>(httpResponse, OK);
 	}
 
 	@Override
 	@RequestMapping(method = RequestMethod.POST, value = "/save")
-	public ResponseEntity<HttpResponse<User>> save(@RequestBody User user) {
+	public ResponseEntity<HttpResponse<User>> save(@RequestBody User user) throws JsonProcessingException {
+
+		userService.log(SAVE, REQUEST, user);
 
 		user = userService.save(user);
-		return createHttpResponse(user, OK);
+
+		HttpResponse<User> httpResponse = userService.createHttpResponse(user, OK);
+		userService.log(SAVE, RESPONSE, httpResponse);
+
+		return new ResponseEntity<HttpResponse<User>>(httpResponse, OK);
 	}
 
 	private HttpHeaders getHeaderWithJwt(UserCustody userCustody) {

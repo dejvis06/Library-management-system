@@ -13,8 +13,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 @Entity
 @Table(name = "user")
+@Document
 public class User {
 
 	@Id

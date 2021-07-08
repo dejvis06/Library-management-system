@@ -1,4 +1,4 @@
-package com.example.lms.repository;
+package com.example.lms.repository.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

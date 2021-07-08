@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.lms.entity.Role;
-import com.example.lms.repository.RoleRepository;
+import com.example.lms.repository.jpa.RoleRepository;
 
 @Service
 public class RoleService {

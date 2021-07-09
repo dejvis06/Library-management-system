@@ -3,6 +3,7 @@ package com.example.lms.controller;
 import static org.springframework.http.HttpStatus.OK;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 @RestController
 @RequestMapping("/book")
+@Profile("mysql")
 public class BookController implements ControllerInterface<Book> {
 
 	private static final String FIND = "FIND";

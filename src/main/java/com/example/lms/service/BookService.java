@@ -3,6 +3,7 @@ package com.example.lms.service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import com.example.lms.entity.Book;
@@ -11,6 +12,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
+@Profile("mysql")
 public class BookService implements ServiceInterface<Book> {
 
 	private static final Logger logger = LogManager.getLogger(BookService.class.getSimpleName());

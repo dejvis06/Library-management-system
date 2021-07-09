@@ -3,6 +3,7 @@ package com.example.lms.controller;
 import static org.springframework.http.HttpStatus.OK;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 @RestController
 @RequestMapping("/user")
+@Profile("mysql")
 public class UserController implements ControllerInterface<User> {
 
 	private static final String FIND = "FIND";

@@ -1,28 +1,37 @@
 package com.example.lms.service;
 
-import java.util.NoSuchElementException;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import com.example.lms.entity.Role;
 import com.example.lms.repository.jpa.RoleRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Service
-public class RoleService {
+@Profile("mysql")
+public class RoleService implements ServiceInterface<Role> {
 
 	@Autowired
 	private RoleRepository roleRepository;
 
-	public Role save(Role role) throws Exception {
+	@Override
+	public Role save(Role role) {
 		return roleRepository.save(role);
 	}
 
-	public void delete(Role role) throws Exception {
-		roleRepository.delete(role);
+	@Override
+	public void delete(int id) {
+		roleRepository.deleteById(id);
 	}
 
-	public Role find(Role role) throws NoSuchElementException {
-		return roleRepository.findById(role.getId()).get();
+	@Override
+	public Role find(int id) {
+		return roleRepository.findById(id).get();
+	}
+
+	@Override
+	public void log(String method, String interchange, Object object) throws JsonProcessingException {
+		// TODO Auto-generated method stub
 	}
 }

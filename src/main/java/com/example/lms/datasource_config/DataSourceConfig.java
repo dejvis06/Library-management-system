@@ -1,6 +1,8 @@
 package com.example.lms.datasource_config;
 
+import javax.sql.DataSource;
+
 public interface DataSourceConfig {
 
-	public void setup();
+	 public DataSource configDataSource();
 }

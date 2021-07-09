@@ -21,11 +21,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @SuppressWarnings("rawtypes")
 public class CustomExceptionHandler {
 
+	private static final String AUTHENTICATION = "org.springframework.security.authentication";
 	private static final Logger logger = LogManager.getLogger(CustomExceptionHandler.class.getSimpleName());
 
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<HttpResponse> general(Exception ex) {
-
 		ex.printStackTrace();
 		return createHttpResponse(INTERNAL_SERVER_ERROR, ex.getMessage());
 	}

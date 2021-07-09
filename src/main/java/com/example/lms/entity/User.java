@@ -43,6 +43,13 @@ public class User {
 		this.username = username;
 	}
 
+	public User(String username, String password,boolean isActive) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.isActive = isActive;
+	}
+
 	public int getId() {
 		return id;
 	}

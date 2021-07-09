@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 
 import com.example.lms.entity.Book;
@@ -37,8 +38,9 @@ public class MySqlConfig implements DataSourceConfig {
 		return dataSourceBuilder.build();
 	}
 
+	@Primary
 	@Bean
-	public UserInterface returnUserMongoService() {
+	public UserInterface userService() {
 		return new UserService();
 	}
 

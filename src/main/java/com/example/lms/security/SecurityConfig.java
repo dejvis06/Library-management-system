@@ -14,15 +14,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.example.lms.service.mysql.UserService;
+import com.example.lms.service.UserInterface;
 
 @Configuration
 @EnableWebSecurity
-@Profile("mysql")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private UserService userDetailsService;
+	private UserInterface userDetailsService;
 
 	@Autowired
 	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;

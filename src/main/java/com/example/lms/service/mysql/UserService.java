@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 @Profile("mysql")
-public class UserService implements UserDetailsService, UserInterface {
+public class UserService implements UserInterface {
 
 	private static final String USERNAME_NOT_FOUND = "Username not found!";
 
@@ -91,6 +91,7 @@ public class UserService implements UserDetailsService, UserInterface {
 		return StringUtils.toStringArray(authorities);
 	}
 
+	@Override
 	public BCryptPasswordEncoder getbCryptPasswordEncoder() {
 		return bCryptPasswordEncoder;
 	}

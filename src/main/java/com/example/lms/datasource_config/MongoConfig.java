@@ -11,8 +11,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 
 import com.example.lms.entity.Book;
-import com.example.lms.entity.User;
 import com.example.lms.service.ServiceInterface;
+import com.example.lms.service.UserInterface;
 import com.example.lms.service.mongo.BookService;
 import com.example.lms.service.mongo.UserService;
 
@@ -47,14 +47,15 @@ public class MongoConfig {
 	public MongoTemplate mongoTemplate() {
 		return new MongoTemplate(mongoDatabaseFactory(mongoProperties()));
 	}
-	
+
+	@Primary
 	@Bean
-	public ServiceInterface<User> returnUserMongoService() {
+	public UserInterface userMongoService() {
 		return new UserService();
 	}
 
 	@Bean
-	public ServiceInterface<Book> returnBookMongoService() {
+	public ServiceInterface<Book> bookMongoService() {
 		return new BookService();
 	}
 }

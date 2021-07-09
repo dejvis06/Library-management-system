@@ -27,7 +27,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 @RestController
 @RequestMapping("/user")
-@Profile("mysql")
+//@Profile("mysql")
 public class UserController implements ControllerInterface<User> {
 
 	private static final String FIND = "FIND";

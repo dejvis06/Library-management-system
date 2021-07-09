@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.example.lms.service.BookService;
-import com.example.lms.service.RoleService;
-import com.example.lms.service.UserService;
+import com.example.lms.service.mysql.BookService;
+import com.example.lms.service.mysql.RoleService;
+import com.example.lms.service.mysql.UserService;
 
 @SpringBootTest
 class LmsApplicationTests {

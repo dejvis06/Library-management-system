@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.lms.entity.User;
 import com.example.lms.security.JWTTokenProvider;
-import com.example.lms.service.UserService;
+import com.example.lms.service.ServiceInterface;
+import com.example.lms.service.UserInterface;
+import com.example.lms.service.mysql.UserService;
 import com.example.lms.util.HttpResponse;
 import com.example.lms.util.SecurityConstant;
 import com.example.lms.util.UserCustody;
@@ -40,14 +42,18 @@ public class UserController implements ControllerInterface<User> {
 
 	private static final String LOGIN = "LOGIN";
 
-	@Autowired
-	private UserService userService;
+	/*
+	 * @Autowired private UserService userService;
+	 */
 
 	@Autowired
 	private JWTTokenProvider jwtTokenProvider;
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
+
+	@Autowired
+	private UserInterface userService;
 
 	@RequestMapping(method = RequestMethod.POST, value = "/login")
 	public ResponseEntity<HttpResponse<User>> login(@RequestBody User user) throws JsonProcessingException {
@@ -56,7 +62,7 @@ public class UserController implements ControllerInterface<User> {
 
 		authenticate(user.getUsername(), user.getPassword());
 
-		UserCustody userCustody = (UserCustody) userService.loadUserByUsername(user.getUsername());
+		UserCustody userCustody = (UserCustody) userService.findByUsername(user.getUsername());
 
 		HttpHeaders header = getHeaderWithJwt(userCustody);
 

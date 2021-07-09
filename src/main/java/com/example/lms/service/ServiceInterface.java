@@ -1,6 +1,5 @@
 package com.example.lms.service;
 
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 
 import com.example.lms.util.HttpResponse;

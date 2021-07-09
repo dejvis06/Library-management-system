@@ -8,6 +8,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.example.lms.entity.Book;
+import com.example.lms.service.ServiceInterface;
+import com.example.lms.service.UserInterface;
+import com.example.lms.service.mysql.BookService;
+import com.example.lms.service.mysql.UserService;
+
 @Configuration
 @Profile("mysql")
 public class MySqlConfig implements DataSourceConfig {
@@ -31,4 +37,14 @@ public class MySqlConfig implements DataSourceConfig {
 		return dataSourceBuilder.build();
 	}
 
+	@Bean
+	public UserInterface returnUserMongoService() {
+		return new UserService();
+	}
+
+	@Bean
+	public ServiceInterface<Book> returnBookMongoService() {
+		return new BookService();
+	}
+	
 }

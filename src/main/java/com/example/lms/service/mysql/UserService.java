@@ -1,4 +1,4 @@
-package com.example.lms.service;
+package com.example.lms.service.mysql;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +17,14 @@ import org.springframework.util.StringUtils;
 import com.example.lms.entity.Role;
 import com.example.lms.entity.User;
 import com.example.lms.repository.jpa.UserRepository;
+import com.example.lms.service.UserInterface;
 import com.example.lms.util.UserCustody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 @Profile("mysql")
-public class UserService implements UserDetailsService, ServiceInterface<User> {
+public class UserService implements UserDetailsService, UserInterface {
 
 	private static final String USERNAME_NOT_FOUND = "Username not found!";
 
@@ -58,6 +59,11 @@ public class UserService implements UserDetailsService, ServiceInterface<User> {
 		user.setAuthorities(getAuthorities(user.getRoles()));
 
 		return user;
+	}
+
+	public UserDetails findByUsername(String username) {
+		User user = userRepository.findByUsername(username);
+		return new UserCustody(user);
 	}
 
 	@Override

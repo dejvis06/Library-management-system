@@ -10,6 +10,12 @@ import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 
+import com.example.lms.entity.Book;
+import com.example.lms.entity.User;
+import com.example.lms.service.ServiceInterface;
+import com.example.lms.service.mongo.BookService;
+import com.example.lms.service.mongo.UserService;
+
 @Configuration
 @Profile("mongo")
 public class MongoConfig {
@@ -40,5 +46,15 @@ public class MongoConfig {
 	@Bean
 	public MongoTemplate mongoTemplate() {
 		return new MongoTemplate(mongoDatabaseFactory(mongoProperties()));
+	}
+	
+	@Bean
+	public ServiceInterface<User> returnUserMongoService() {
+		return new UserService();
+	}
+
+	@Bean
+	public ServiceInterface<Book> returnBookMongoService() {
+		return new BookService();
 	}
 }

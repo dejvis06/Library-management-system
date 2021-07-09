@@ -1,4 +1,4 @@
-package com.example.lms.service;
+package com.example.lms.service.mysql;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.lms.entity.Book;
 import com.example.lms.repository.jpa.BookRepository;
+import com.example.lms.service.ServiceInterface;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -40,4 +41,5 @@ public class BookService implements ServiceInterface<Book> {
 		String log = method.concat(", " + interchange).concat(": " + new ObjectMapper().writeValueAsString(object));
 		logger.info(log);
 	}
+
 }

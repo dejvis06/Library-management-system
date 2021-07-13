@@ -26,7 +26,7 @@ public class CustomExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<HttpResponse> general(Exception ex) {
 
-		// ex.printStackTrace();
+		ex.printStackTrace();
 		switch (ex.getClass().getPackageName()) {
 
 		case AUTHENTICATION_PACKAGE:

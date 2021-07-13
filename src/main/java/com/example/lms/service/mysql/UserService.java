@@ -12,8 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.example.lms.entity.jpa.Role;
-import com.example.lms.entity.jpa.User;
+import com.example.lms.entity.Role;
+import com.example.lms.entity.User;
 import com.example.lms.repository.UserRepository;
 import com.example.lms.service.UserInterface;
 import com.example.lms.util.UserCustody;
@@ -63,15 +63,16 @@ public class UserService implements UserInterface {
 		return new UserCustody(user);
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
 		User user = userRepository.findByUsername(username);
-
 		if (user == null)
 			throw new UsernameNotFoundException(USERNAME_NOT_FOUND);
 
-		user.setAuthorities(getAuthorities(user.getRoles()));
+		// user.setAuthorities(getAuthorities((List<Role>)
+		// user.getClass().asSubclass(com.example.lms.entity.jpa.User.class).getField("roles").get(user)));
 		return new UserCustody(user);
 	}
 

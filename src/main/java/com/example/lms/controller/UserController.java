@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.lms.entity.jpa.User;
+import com.example.lms.entity.User;
 import com.example.lms.security.JWTTokenProvider;
 import com.example.lms.service.mysql.UserService;
 import com.example.lms.util.HttpResponse;
@@ -47,10 +47,11 @@ public class UserController implements ControllerInterface<User> {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
+	@SuppressWarnings("rawtypes")
 	@RequestMapping(method = RequestMethod.POST, value = "/login")
 	public ResponseEntity<HttpResponse<User>> login(@RequestBody User user) throws JsonProcessingException {
 
-		userService.log(LOGIN, REQUEST, user);
+		//userService.log(LOGIN, REQUEST, user);
 
 		authenticate(user.getUsername(), user.getPassword());
 
@@ -60,7 +61,7 @@ public class UserController implements ControllerInterface<User> {
 
 		HttpResponse<User> response = new HttpResponse<User>(OK, OK.value(), OK.getReasonPhrase(),
 				userCustody.getUser());
-		userService.log(LOGIN, RESPONSE, response);
+		//userService.log(LOGIN, RESPONSE, response);
 
 		return new ResponseEntity<>(new HttpResponse<User>(OK, OK.value(), OK.getReasonPhrase(), userCustody.getUser()),
 				header, HttpStatus.OK);

@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.lms.entity.jpa.User;
+import com.example.lms.entity.User;
 
 @Repository("userMongoRepository")
 @Profile("mongo")

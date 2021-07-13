@@ -1,4 +1,4 @@
-package com.example.lms.entity.jpa;
+package com.example.lms.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,23 +6,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 @Entity
-@Table(name = "role")
-public class Role {
+@Table(name = "book")
+@Document
+public class Book {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	private String name;
+	private String title;
 
-	public Role() {
+	public Book() {
 
 	}
 
-	public Role(String name) {
+	public Book(String title) {
 		super();
-		this.name = name;
+		this.title = title;
 	}
 
 	public int getId() {
@@ -33,12 +36,12 @@ public class Role {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 }

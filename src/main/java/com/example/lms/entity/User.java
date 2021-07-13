@@ -2,21 +2,44 @@ package com.example.lms.entity;
 
 import java.util.List;
 
-import javax.persistence.MappedSuperclass;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import com.example.lms.entity.mongo.Role;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
 
-@MappedSuperclass
-public abstract class User {
+@Entity
+@Table(name = "user")
+@Document(collection = "library management system")
+public class User {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Field(name = "_id")
+	private Integer id;
 
 	private String username;
 
 	private String password;
 
-	private String[] authorities;
-
+	@Field(name = "active")
 	private boolean isActive;
 
+	@Transient
+	private String[] authorities;
+
+	@ManyToMany(cascade = { CascadeType.MERGE })
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user"), inverseJoinColumns = @JoinColumn(name = "role"))
 	private List<Role> roles;
 
 	public User() {
@@ -33,6 +56,14 @@ public abstract class User {
 		this.username = username;
 		this.password = password;
 		this.isActive = isActive;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getUsername() {
@@ -63,12 +94,12 @@ public abstract class User {
 		return isActive;
 	}
 
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
-	}
-
 	public List<Role> getRoles() {
 		return roles;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	public void setRoles(List<Role> roles) {

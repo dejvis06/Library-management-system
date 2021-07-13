@@ -10,8 +10,9 @@ import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 
-import com.example.lms.entity.jpa.User;
+import com.example.lms.entity.User;
 import com.example.lms.repository.UserRepository;
+import com.example.lms.service.mysql.UserService;
 
 @Configuration
 @Profile("mongo")

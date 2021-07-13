@@ -4,11 +4,10 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.lms.entity.User;
+import com.example.lms.entity.jpa.User;
 
 @Repository
 @Profile("mysql")
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Integer>, com.example.lms.repository.UserRepository {
 
-	public User findByUsername(String username);
 }

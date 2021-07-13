@@ -6,14 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 
-import com.example.lms.entity.Book;
-import com.example.lms.service.ServiceInterface;
-import com.example.lms.service.UserInterface;
-import com.example.lms.service.mysql.BookService;
-import com.example.lms.service.mysql.UserService;
+import com.example.lms.entity.jpa.User;
+import com.example.lms.repository.UserRepository;
 
 @Configuration
 @Profile("mysql")
@@ -21,6 +17,8 @@ public class MySqlConfig implements DataSourceConfig {
 
 	@Autowired
 	private DataSourceProperties dataSourceProperties;
+
+	private com.example.lms.repository.jpa.UserRepository userRepository;
 
 	@Bean
 	@Override
@@ -38,15 +36,9 @@ public class MySqlConfig implements DataSourceConfig {
 		return dataSourceBuilder.build();
 	}
 
-	@Primary
 	@Bean
-	public UserInterface userService() {
-		return new UserService();
+	public UserRepository userRepository() {
+		return userRepository;
 	}
 
-	@Bean
-	public ServiceInterface<Book> returnBookMongoService() {
-		return new BookService();
-	}
-	
 }

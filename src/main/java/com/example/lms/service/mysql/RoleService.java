@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import com.example.lms.entity.Role;
+import com.example.lms.entity.jpa.Role;
 import com.example.lms.repository.jpa.RoleRepository;
 import com.example.lms.service.ServiceInterface;
 import com.fasterxml.jackson.core.JsonProcessingException;

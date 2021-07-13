@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.lms.entity.Book;
+import com.example.lms.entity.jpa.Book;
 
 @Repository
 @Profile("mysql")

@@ -9,7 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.example.lms.entity.User;
+import com.example.lms.entity.jpa.User;
 
 public class UserCustody implements UserDetails {
 

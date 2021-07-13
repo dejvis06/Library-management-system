@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import com.example.lms.entity.Book;
+import com.example.lms.entity.jpa.Book;
 import com.example.lms.repository.jpa.BookRepository;
 import com.example.lms.service.ServiceInterface;
 import com.fasterxml.jackson.core.JsonProcessingException;

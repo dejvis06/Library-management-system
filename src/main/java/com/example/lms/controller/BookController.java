@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.lms.entity.Book;
+import com.example.lms.entity.jpa.Book;
 import com.example.lms.service.mysql.BookService;
 import com.example.lms.util.HttpResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;

@@ -1,7 +1,6 @@
 package com.example.lms.controller;
 
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.*;
 
 import java.util.NoSuchElementException;
 
@@ -21,13 +20,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @SuppressWarnings("rawtypes")
 public class CustomExceptionHandler {
 
-	private static final String AUTHENTICATION = "org.springframework.security.authentication";
+	private static final String AUTHENTICATION_PACKAGE = "org.springframework.security.authentication";
 	private static final Logger logger = LogManager.getLogger(CustomExceptionHandler.class.getSimpleName());
 
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<HttpResponse> general(Exception ex) {
-		ex.printStackTrace();
-		return createHttpResponse(INTERNAL_SERVER_ERROR, ex.getMessage());
+
+		// ex.printStackTrace();
+		switch (ex.getClass().getPackageName()) {
+
+		case AUTHENTICATION_PACKAGE:
+			return createHttpResponse(FORBIDDEN, ex.getMessage());
+		default:
+			return createHttpResponse(INTERNAL_SERVER_ERROR, ex.getMessage());
+		}
 	}
 
 	@ExceptionHandler(NoSuchElementException.class)

@@ -3,7 +3,6 @@ package com.example.lms.controller;
 import static org.springframework.http.HttpStatus.OK;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.lms.entity.User;
+import com.example.lms.entity.jpa.User;
 import com.example.lms.security.JWTTokenProvider;
-import com.example.lms.service.ServiceInterface;
-import com.example.lms.service.UserInterface;
 import com.example.lms.service.mysql.UserService;
 import com.example.lms.util.HttpResponse;
 import com.example.lms.util.SecurityConstant;
@@ -27,7 +24,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 @RestController
 @RequestMapping("/user")
-//@Profile("mysql")
 public class UserController implements ControllerInterface<User> {
 
 	private static final String FIND = "FIND";
@@ -42,18 +38,14 @@ public class UserController implements ControllerInterface<User> {
 
 	private static final String LOGIN = "LOGIN";
 
-	/*
-	 * @Autowired private UserService userService;
-	 */
+	@Autowired
+	private UserService userService;
 
 	@Autowired
 	private JWTTokenProvider jwtTokenProvider;
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
-
-	@Autowired
-	private UserInterface userService;
 
 	@RequestMapping(method = RequestMethod.POST, value = "/login")
 	public ResponseEntity<HttpResponse<User>> login(@RequestBody User user) throws JsonProcessingException {

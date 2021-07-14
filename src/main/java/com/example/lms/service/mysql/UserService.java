@@ -28,27 +28,18 @@ public class UserService implements UserInterface {
     private static final Logger logger = LogManager.getLogger(UserService.class.getSimpleName());
 
     @Autowired
-    private UserRepository   userRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public User find(int id) {
+    public User save(User user) {
 
-        User user = userRepository.findById(id).get();
-        user.setAuthorities(getAuthorities(user.getRoles()));
-
-        return user;
-    }
-
-	@Override
-	public User save(User user) {
-
-		if (user.getId() == 0) {
-			user.setPassword(encodePassword(user.getPassword()));
-			user.setActive(false);
-		}
+        if (user.getId() == 0) {
+            user.setPassword(encodePassword(user.getPassword()));
+            user.setActive(false);
+        }
 
         return userRepository.save(user);
     }
@@ -58,7 +49,14 @@ public class UserService implements UserInterface {
         userRepository.deleteById(id);
     }
 
+    @Override
+    public User find(int id) {
 
+        User user = userRepository.findById(id).get();
+        user.setAuthorities(getAuthorities(user.getRoles()));
+
+        return user;
+    }
 
     public UserDetails findByUsername(String username) {
         User user = userRepository.findByUsername(username);

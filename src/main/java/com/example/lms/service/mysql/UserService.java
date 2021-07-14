@@ -33,6 +33,15 @@ public class UserService implements UserInterface {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Override
+    public User find(int id) {
+
+        User user = userRepository.findById(id).get();
+        user.setAuthorities(getAuthorities(user.getRoles()));
+
+        return user;
+    }
+
 	@Override
 	public User save(User user) {
 
@@ -49,14 +58,7 @@ public class UserService implements UserInterface {
         userRepository.deleteById(id);
     }
 
-    @Override
-    public User find(int id) {
 
-        User user = userRepository.findById(id).get();
-        user.setAuthorities(getAuthorities(user.getRoles()));
-
-        return user;
-    }
 
     public UserDetails findByUsername(String username) {
         User user = userRepository.findByUsername(username);
